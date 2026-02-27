@@ -25,11 +25,7 @@
             padding: 20px 30px;
             font-size: 20px;
             gap: 40px;
-
-
         }
-
-
         .nav-bar a {
             text-decoration: none;
             color: #414844;
@@ -52,39 +48,31 @@
             font-family: Arial, sans-serif;
             font-weight: bold;
             margin-bottom: 25px;
-
         }
 
         .colorful-heading span:nth-child(1) {
             color: blue;
         }
 
-        /* Blue */
         .colorful-heading span:nth-child(2) {
             color: red;
         }
 
-        /* Red */
         .colorful-heading span:nth-child(3) {
-            color: yellow
+            color: yellow;
         }
 
-        /* Yellow */
         .colorful-heading span:nth-child(4) {
             color: blueviolet;
         }
 
-        /* Blue violet */
         .colorful-heading span:nth-child(5) {
             color: green;
         }
 
-        /* Green */
         .colorful-heading span:nth-child(6) {
             color: red;
         }
-
-        /* Red */
 
         .search-form {
             display: flex;
@@ -141,6 +129,30 @@
             background-color: #f8f9fa;
             color: #202124;
         }
+
+        /* Special styling for the lucky button form */
+        .lucky-form {
+            display: inline-block;
+        }
+        
+        .lucky-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #f8faf8;
+            border-radius: 4px;
+            color: #000000;
+            font-size: 14px;
+            padding: 0 16px;
+            height: 36px;
+            cursor: pointer;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+
+        .lucky-btn:hover {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dadce0;
+            background-color: #f8f9fa;
+            color: #202124;
+        }
     </style>
 </head>
 
@@ -156,18 +168,38 @@
         <a href="advance.html">Advance</a>
     </div>
 
-
-    <!-- Your provided form structure, enhanced with Google styling -->
+    <!-- Regular Google Search Form -->
     <form class="search-form" action="https://www.google.com/search" method="GET">
         <div class="search-bar-container">
-            <!-- Your input element, now with class for styling -->
             <input type="text" name="q" class="search-input" placeholder="Search or type a URL">
         </div>
         <div class="button-group">
             <button type="submit" class="search-btn">Google Search</button>
+            
+            <!-- I'm Feeling Lucky Button - Using a separate form -->
+            <button type="submit" form="lucky-form" class="lucky-btn">I'm Feeling Lucky</button>
         </div>
     </form>
-    </div>
+
+    <!-- Hidden form for I'm Feeling Lucky -->
+    <form id="lucky-form" action="https://www.google.com/search" method="GET" style="display: none;">
+        <input type="hidden" name="q" id="lucky-query">
+        <input type="hidden" name="btnI" value="1">
+    </form>
+
+    <!-- Small JavaScript to sync the search query (minimal, just for functionality) -->
+    <script>
+        // It copies the search query from the main input to the hidden form
+        document.querySelector('.lucky-btn').addEventListener('click', function(e) {
+            const query = document.querySelector('.search-input').value;
+            if (query.trim() === '') {
+                e.preventDefault();
+                alert('Please enter a search query');
+                return;
+            }
+            document.getElementById('lucky-query').value = query;
+        });
+    </script>
 </body>
 
 </html>
